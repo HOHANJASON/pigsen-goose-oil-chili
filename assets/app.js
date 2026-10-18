@@ -2,7 +2,7 @@ const header=document.querySelector('.site-header');
 const qty=document.querySelector('#quantity');
 const summaryQty=document.querySelector('#summaryQuantity');
 const toast=document.querySelector('#toast');
-const dialog=document.querySelector('#setupDialog');
+const lineUrl='https://lin.ee/NnF4M0Y';
 
 document.querySelector('#year').textContent=new Date().getFullYear();
 window.addEventListener('scroll',()=>header.classList.toggle('scrolled',window.scrollY>20),{passive:true});
@@ -20,9 +20,7 @@ document.querySelectorAll('[data-step]').forEach(button=>{
 });
 qty.addEventListener('input',()=>summaryQty.textContent=Math.min(99,Math.max(1,Number(qty.value)||1)));
 
-document.querySelectorAll('.js-line').forEach(button=>button.addEventListener('click',()=>dialog.showModal()));
-dialog.querySelector('.dialog-close').addEventListener('click',()=>dialog.close());
-dialog.addEventListener('click',event=>{if(event.target===dialog)dialog.close()});
+document.querySelectorAll('.js-line').forEach(button=>button.addEventListener('click',()=>window.open(lineUrl,'_blank','noopener')));
 
 function showToast(message){toast.textContent=message;toast.classList.add('show');setTimeout(()=>toast.classList.remove('show'),2600)}
 
@@ -41,5 +39,5 @@ document.querySelector('#orderForm').addEventListener('submit',async event=>{
   try{await navigator.clipboard.writeText(order);showToast('訂購資料已複製');}
   catch{showToast('資料已整理，請手動複製');}
   document.querySelector('#formFeedback').textContent='資料已整理完成；請加入官方 LINE 確認價格與賣貨便連結。';
-  setTimeout(()=>dialog.showModal(),350);
+  setTimeout(()=>window.open(lineUrl,'_blank','noopener'),350);
 });
