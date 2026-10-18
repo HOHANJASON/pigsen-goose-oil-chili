@@ -20,8 +20,6 @@ document.querySelectorAll('[data-step]').forEach(button=>{
 });
 qty.addEventListener('input',()=>summaryQty.textContent=Math.min(99,Math.max(1,Number(qty.value)||1)));
 
-document.querySelectorAll('.js-line').forEach(button=>button.addEventListener('click',()=>window.open(lineUrl,'_blank','noopener')));
-
 function showToast(message){toast.textContent=message;toast.classList.add('show');setTimeout(()=>toast.classList.remove('show'),2600)}
 
 document.querySelector('#orderForm').addEventListener('submit',async event=>{
@@ -39,5 +37,5 @@ document.querySelector('#orderForm').addEventListener('submit',async event=>{
   try{await navigator.clipboard.writeText(order);showToast('訂購資料已複製');}
   catch{showToast('資料已整理，請手動複製');}
   document.querySelector('#formFeedback').textContent='資料已整理完成；請加入官方 LINE 確認價格與賣貨便連結。';
-  setTimeout(()=>window.open(lineUrl,'_blank','noopener'),350);
+  window.location.assign(lineUrl);
 });
